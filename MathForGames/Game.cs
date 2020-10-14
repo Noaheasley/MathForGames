@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using MathLibrary;
 using System.Threading;
 namespace MathForGames
 {
@@ -10,28 +11,34 @@ namespace MathForGames
         private static bool _gameOver = false;
         private Scene _scene;
         private Actor _actor;
-            
-        //return if specific key is pressed
-       public static bool CheckKey(ConsoleKey key)
+
+        public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
+        public static ConsoleKey GetNextKey()
         {
-            if(Console.KeyAvailable)
+            //if the user hasn't pressed the right key it will return zero
+            if(!Console.KeyAvailable)
             {
-                if (Console.ReadKey(true).Key == key)
-                {
-                    return true;
-                }
+                return 0;
             }
-            
-            return false;
+            //returns the key
+            return Console.ReadKey(true).Key;
         }
 
 
+        public static void SetGameOver(bool value)
+        {
+            _gameOver = value;
+        }
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
+            
             _scene = new Scene();
-            Actor actor = new Actor();
+            Actor actor = new Actor(0,0,'o', ConsoleColor.Green);
+            actor.Velocity.X = 1;
+            Player player = new Player(10, 0, '@', ConsoleColor.Red);
             _scene.AddActor(actor);
+            _scene.AddActor(player);
         }
 
 
@@ -55,6 +62,7 @@ namespace MathForGames
 
         }
 
+        
 
         //Handles all of the main game logic including the main game loop.
         public void Run()
@@ -66,7 +74,7 @@ namespace MathForGames
                 Update();
                 Draw();
                 while (Console.KeyAvailable) Console.ReadKey(true);
-                Thread.Sleep(250);
+                Thread.Sleep(100);
             }
 
             End();
