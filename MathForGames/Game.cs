@@ -14,22 +14,38 @@ namespace MathForGames
         private static int _currentSceneIndex;
 
         public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
-        public static ConsoleKey GetNextKey()
-        {
-            //if the user hasn't pressed the right key it will return zero
-            if(!Console.KeyAvailable)
-            {
-                return 0;
-            }
-            //returns the key
-            return Console.ReadKey(true).Key;
-        }
+        //public static ConsoleKey GetNextKey()
+        //{
+        //    //if the user hasn't pressed the right key it will return zero
+        //    if(!Console.KeyAvailable)
+        //    {
+        //        return 0;
+        //    }
+        //    //returns the key
+        //    return Console.ReadKey(true).Key;
+        //}
 
         public static Scene GetScenes(int index)
         {
             return _scenes[index];
         }
 
+        //public static int GetNextKey()
+        //{
+        //    return Raylib.GetKeyPressed();
+        //}
+
+        public static bool GetKeyDown(int key)
+        {
+            bool testbool = true;
+            int test = Convert.ToInt32(testbool);
+            return Raylib.IsKeyDown((KeyboardKey)key);
+        }
+        public static bool GetKeyPressed(int key)
+        {
+
+            return Raylib.IsKeyPressed((KeyboardKey)key);
+        }
         public static int AddScene(Scene scene)
         {
             Scene[] tempArray = new Scene[_scenes.Length + 1];
@@ -90,12 +106,9 @@ namespace MathForGames
         {
             if (index < 0 || index > _scenes.Length)
                 return;
-
-            _scenes[_currentSceneIndex].End();
-
+            if (_scenes[_currentSceneIndex].Started)
+                _scenes[_currentSceneIndex].End();
             _currentSceneIndex = index;
-
-            _scenes[_currentSceneIndex].Start();
         }
         //Called when the game begins. Use this for initialization.
         public void Start()
@@ -125,6 +138,8 @@ namespace MathForGames
         //Called every frame.
         public void Update()
         {
+            if (!_scenes[_currentSceneIndex].Started)
+                _scenes[_currentSceneIndex].Start();
             _scenes[_currentSceneIndex].Update();
         }
 
@@ -142,7 +157,9 @@ namespace MathForGames
         //Called when the game ends.
         public void End()
         {
-            _scenes[_currentSceneIndex].End();
+            if(_scenes[_currentSceneIndex].Started)
+                _scenes[_currentSceneIndex].End();
+
         }
 
         

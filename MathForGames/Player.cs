@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MathLibrary;
 using Raylib_cs;
 
 namespace MathForGames
@@ -20,27 +21,38 @@ namespace MathForGames
         }
         public override void Update()
         {
-            ConsoleKey keyPressed = Game.GetNextKey();
+            int xVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_A))
+                + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_D));
+            int yVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_W))
+                + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
 
-            switch (keyPressed)
+            Velocity = new Vector2(xVelocity, yVelocity);
+            if (GetMagnitude() != 0)
             {
-                case ConsoleKey.D:
-                    _velocity.X = 1;
-                    break;
-                case ConsoleKey.A:
-                    _velocity.X = -1;
-                    break;
-                case ConsoleKey.W:
-                    _velocity.Y = -1;
-                    break;
-                case ConsoleKey.S:
-                    _velocity.Y = 1;
-                    break;
-                default:
-                    _velocity.X = 0;
-                    _velocity.Y = 0;
-                    break;
+                Velocity.X /= Velocity.GetMagnitude();
+                Velocity.Y /= Velocity.GetMagnitude();
             }
+            //ConsoleKey keyPressed = Game.GetNextKey();
+
+            //switch (keyPressed)
+            //{
+            //    case ConsoleKey.D:
+            //        _velocity.X = 1;
+            //        break;
+            //    case ConsoleKey.A:
+            //        _velocity.X = -1;
+            //        break;
+            //    case ConsoleKey.W:
+            //        _velocity.Y = -1;
+            //        break;
+            //    case ConsoleKey.S:
+            //        _velocity.Y = 1;
+            //        break;
+            //    default:
+            //        _velocity.X = 0;
+            //        _velocity.Y = 0;
+            //        break;
+            //}
             base.Update();
         }
     }

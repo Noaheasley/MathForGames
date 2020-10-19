@@ -46,7 +46,7 @@ namespace MathForGames
             {
                 //if the current index is not the index that needs to be removed
                 //add the value into the old array and increment j
-                if(i != index)
+                if (i != index)
                 {
                     tempArray[j] = _actors[i];
                     j++;
@@ -54,6 +54,8 @@ namespace MathForGames
                 else
                 {
                     actorRemoved = true;
+                    if (_actors[i].Started)
+                        _actors[i].End();
                 }
             }
             //set the old array to be the tempArray
@@ -83,6 +85,9 @@ namespace MathForGames
                 else
                 {
                     actorRemoved = true;
+                    if (actor.Started)
+                        actor.End();
+
                 }
             }
             _actors = newArray;
@@ -102,6 +107,9 @@ namespace MathForGames
         {
             for (int i = 0; i < _actors.Length; i++)
             {
+                if (!_actors[i].Started)
+                    _actors[i].Start();
+
                 _actors[i].Update();
             }
         }
@@ -118,8 +126,12 @@ namespace MathForGames
         {
             for (int i = 0; i < _actors.Length; i++)
             {
-                _actors[i].End();
+                if (_actors[i].Started)
+                    _actors[i].End();
+                _actors[i].Draw();
             }
+
+            Started = false;
         }
     }
 }
