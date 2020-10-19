@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Raylib_cs;
 
 namespace MathForGames
 {
@@ -12,6 +13,11 @@ namespace MathForGames
 
         }
 
+        public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
+            : base(x,y,raycolor, icon, color)
+        {
+
+        }
         public override void Update()
         {
             ConsoleKey keyPressed = Game.GetNextKey();
