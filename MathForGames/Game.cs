@@ -13,27 +13,25 @@ namespace MathForGames
         private static Scene[] _scenes;
         private static int _currentSceneIndex;
 
+        public static int CurrentSceneIndex
+        {
+            get
+            {
+                return _currentSceneIndex;
+            }
+        }
         public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
-        //public static ConsoleKey GetNextKey()
-        //{
-        //    //if the user hasn't pressed the right key it will return zero
-        //    if(!Console.KeyAvailable)
-        //    {
-        //        return 0;
-        //    }
-        //    //returns the key
-        //    return Console.ReadKey(true).Key;
-        //}
-
+       
         public static Scene GetScenes(int index)
         {
             return _scenes[index];
         }
 
-        //public static int GetNextKey()
-        //{
-        //    return Raylib.GetKeyPressed();
-        //}
+        public static Scene GetCurrentScene()
+        {
+            return _scenes[_currentSceneIndex];
+        }
+
 
         public static bool GetKeyDown(int key)
         {
@@ -113,7 +111,7 @@ namespace MathForGames
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
-            Raylib.InitWindow(1024, 760, "Math For Games");
+            Raylib.InitWindow(1024, 760, "Math for games");
             Raylib.SetTargetFPS(60);
 
             Scene scene1 = new Scene();
@@ -130,17 +128,18 @@ namespace MathForGames
             
             startingSceneIndex = AddScene(scene1);
             AddScene(scene2);
+            player.Speed = 5;
 
             SetCurrentScene(startingSceneIndex);
         }
 
 
         //Called every frame.
-        public void Update()
+        public void Update(float deltaTime)
         {
             if (!_scenes[_currentSceneIndex].Started)
                 _scenes[_currentSceneIndex].Start();
-            _scenes[_currentSceneIndex].Update();
+            _scenes[_currentSceneIndex].Update(deltaTime);
         }
 
         //Used to display objects and other info on the screen.
@@ -171,10 +170,12 @@ namespace MathForGames
 
             while(!_gameOver || !Raylib.WindowShouldClose())
             {
-                Update();
+                float deltaTime = Raylib.GetFrameTime();
+                Update(deltaTime);
                 Draw();
-                while (Console.KeyAvailable) Console.ReadKey(true);
-                Thread.Sleep(100);
+                while (Console.KeyAvailable) 
+                    Console.ReadKey(true);
+
             }
 
             End();
