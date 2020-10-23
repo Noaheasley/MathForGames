@@ -116,10 +116,13 @@ namespace MathForGames
 
             Scene scene1 = new Scene();
             Scene scene2 = new Scene();
-            Actor actor = new Actor(0,0,Color.GREEN, 'o', ConsoleColor.Green);
+            Actor actor = new Actor(0,1,Color.GREEN, 'o', ConsoleColor.Green);
+            Enemy enemy = new Enemy(10, 10, Color.GREEN, 'E', ConsoleColor.Green);
             actor.Velocity.X = 1;
-            Player player = new Player(10, 0, Color.RED, '@', ConsoleColor.Red);
+            Player player = new Player(0, 0, Color.PURPLE, '@', ConsoleColor.Red);
+            enemy.Target = player;
             scene1.AddActor(actor);
+            scene1.AddActor(enemy);
             scene1.AddActor(player);
 
             scene2.AddActor(player);

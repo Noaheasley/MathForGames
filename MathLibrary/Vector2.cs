@@ -44,7 +44,12 @@ namespace MathLibrary
             _x = x;
             _y = y;
         }
-
+        public static float Distance(Vector2 lhs, Vector2 rhs)
+        {
+            float XSqr = (lhs.X - rhs.X) * (lhs.X - rhs.X);
+            float YSqr = (lhs.Y - rhs.Y) * (lhs.Y - rhs.Y);
+            return (float)Math.Sqrt(XSqr + YSqr);
+        }
         public static float DotProduct(Vector2 lhs, Vector2 rhs)
         {
             return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
@@ -76,6 +81,14 @@ namespace MathLibrary
                 return Normalize(this);
             }
         }
+        public float DRange
+        {
+            get
+            {
+                return Distance(this, this);
+            }
+        }
+
 
         /// <summary>
         /// returns the normalized version of the vector passed in
