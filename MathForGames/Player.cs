@@ -9,7 +9,7 @@ namespace MathForGames
     class Player: Actor
     {
         private float _speed = 1;
-
+        private Sprite _sprite;
         public float Speed
         {
             get
@@ -24,13 +24,13 @@ namespace MathForGames
         public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x,y,icon,color)
         {
-
+            _sprite = new Sprite("Images/player.png");
         }
 
         public Player(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x,y,raycolor, icon, color)
         {
-
+            _sprite = new Sprite("Images/player.png");
         }
         public override void Update(float deltaTime)
         {
@@ -44,6 +44,12 @@ namespace MathForGames
             
             
             base.Update(deltaTime);
+        }
+
+        public override void Draw()
+        {
+            _sprite.Draw(_transform);
+            base.Draw();
         }
     }
 }
