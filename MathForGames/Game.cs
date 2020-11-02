@@ -120,6 +120,9 @@ namespace MathForGames
             Enemy enemy = new Enemy(10, 10, Color.GREEN, 'E', ConsoleColor.Green);
             actor.Velocity.X = 1;
             Player player = new Player(10, 10, Color.PURPLE, ' ', ConsoleColor.Red);
+            player.SetTranslate(new Vector2(10, 10));
+            player.SetRotation(1);
+            player.SetScale(1, 3);
             enemy.Target = player;
             scene1.AddActor(actor);
             scene1.AddActor(enemy);

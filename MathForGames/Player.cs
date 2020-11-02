@@ -9,7 +9,6 @@ namespace MathForGames
     class Player: Actor
     {
         private float _speed = 1;
-        private Sprite _sprite;
         public float Speed
         {
             get
@@ -38,6 +37,8 @@ namespace MathForGames
                 + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_D));
             int yVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_W))
                 + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
+
+            
 
             Velocity = new Vector2(xVelocity, yVelocity);
             Velocity = Velocity.Normalized * Speed;

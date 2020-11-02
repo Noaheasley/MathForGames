@@ -9,7 +9,6 @@ namespace MathForGames
     class Sprite
     {
         protected Texture2D _texture;
-        private Vector2 _scale;
 
         //Width of the loaded texture
         public int Width
@@ -82,7 +81,7 @@ namespace MathForGames
 
             //Draw the sprite
             Raylib.DrawTextureEx(_texture, pos * 32,
-                (float)(rotation * 180.0f / Math.PI), transform.m12 += transform.m21 , Color.WHITE);
+                (float)(rotation * 180.0f / Math.PI), 32 , Color.WHITE);
         }
     }
 }
