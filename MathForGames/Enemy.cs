@@ -19,12 +19,13 @@ namespace MathForGames
         public Enemy(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         {
-
+            _sprite = new Sprite("Images/enemy.png");
         }
 
         public Enemy(float x, float y, Color raycolor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, raycolor, icon, color)
         {
+            _sprite = new Sprite("Images/enemy.png");
             _alertColor = Color.RED;
         }
 
@@ -33,8 +34,8 @@ namespace MathForGames
             if (Target == null)
                 return false;
             
-            Vector2 direction = Target.Position - Position;
-            float distance = (Target.Position - Position).Magnitude;
+            Vector2 direction = Target.LocalPosition - LocalPosition;
+            float distance = (Target.LocalPosition - LocalPosition).Magnitude;
             float angle = (float)Math.Acos(Vector2.DotProduct(Forward, direction.Normalized));
 
             if (angle <= maxAngle && distance <= maxDistance)
@@ -55,6 +56,12 @@ namespace MathForGames
                 _rayColor = Color.BLUE;
             }
             base.Update(deltaTime);
+        }
+
+        public override void Draw()
+        {
+            _sprite.Draw(_localTransform);
+            base.Draw();
         }
     }
 }
