@@ -20,6 +20,8 @@ namespace MathForGames
         protected Color _rayColor;
         protected Actor _parent;
         protected Actor[] _children = new Actor[0];
+        protected float _rotationAngle;
+        private float _collisionRadius;
 
         public bool Started { get; private set; }
 
@@ -162,6 +164,15 @@ namespace MathForGames
             Started = true;
         }
 
+        public bool CheckCollision(Actor other)
+        {
+            
+            return false;
+        }
+        public virtual void OnCollision(Actor other)
+        {
+
+        }
         public virtual void Update(float deltaTime)
         {
             UpdateTransform();
