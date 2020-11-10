@@ -20,6 +20,10 @@ namespace MathForGames
             _actors = new Actor[0];
         }
 
+        private void CheckCollision()
+        {
+
+        }
         public void AddActor(Actor actor)
         {
             //creating a new array with a size one greater than our old array
