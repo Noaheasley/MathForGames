@@ -41,6 +41,7 @@ namespace MathForGames3D
 
             Raylib.DrawGrid(10, 1.0f);
 
+            Raylib.DrawSphere(new System.Numerics.Vector3(), 1, Color.DARKPURPLE);
             Raylib.EndMode3D();
             Raylib.EndDrawing();
         }
