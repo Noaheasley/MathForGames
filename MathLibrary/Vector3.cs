@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MathLibrary
 {
-    class Vector3
+    public class Vector3
     {
         private float _x;
         private float _y;
@@ -92,6 +92,13 @@ namespace MathLibrary
 
             return vector / vector.Magnitude;
         }
+
+
+        public static float CrossProduct(Vector4 lhs, Vector4 rhs)
+        {
+            return (lhs.Y * rhs.Z - lhs.Z * rhs.Y) * (lhs.Z * rhs.X - lhs.X * rhs.Z) * (lhs.X * rhs.Y - lhs.Y * rhs.X);
+        }
+
 
         public static Vector3 operator +(Vector3 lhs, Vector3 rhs)
         {
