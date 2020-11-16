@@ -60,16 +60,17 @@ namespace MathLibrary
             _z = z;
         }
 
+        
         public static float DotProduct(Vector3 lhs, Vector3 rhs)
         {
-            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * lhs.Z);
         }
 
         public float Magnitude
         {
             get
             {
-                return (float)Math.Sqrt(X * X + Y * Y);
+                return (float)Math.Sqrt(X * X + Y * Y + Z * Z);
             }
         }
         public Vector3 Normalized
@@ -94,11 +95,20 @@ namespace MathLibrary
         }
 
 
-        public static float CrossProduct(Vector4 lhs, Vector4 rhs)
+        public static Vector3 CrossProduct(Vector3 lhs, Vector3 rhs)
         {
-            return (lhs.Y * rhs.Z - lhs.Z * rhs.Y) * (lhs.Z * rhs.X - lhs.X * rhs.Z) * (lhs.X * rhs.Y - lhs.Y * rhs.X);
+            return new Vector3((lhs.Y * rhs.Z - lhs.Z * rhs.Y) , 
+                (lhs.Z * rhs.X - lhs.X * rhs.Z) , 
+                (lhs.X * rhs.Y - lhs.Y * rhs.X));
         }
-
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        {
+            return new Vector3(
+                   lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z,
+                   lhs.m21 * rhs.X + lhs.m22 * rhs.Y + lhs.m23 * rhs.Z,
+                   lhs.m31 * rhs.X + lhs.m32 * rhs.Y + lhs.m33 * rhs.Z
+                   );
+        }
 
         public static Vector3 operator +(Vector3 lhs, Vector3 rhs)
         {
@@ -112,6 +122,10 @@ namespace MathLibrary
         public static Vector3 operator *(Vector3 lhs, float scalar)
         {
             return new Vector3(lhs.X * scalar, lhs.Y * scalar, lhs.Z * scalar);
+        }
+        public static Vector3 operator *(float scalar, Vector3 rhs)
+        {
+            return new Vector3(scalar * rhs.X, scalar * rhs.Y, scalar * rhs.Z);
         }
         public static Vector3 operator /(Vector3 lhs, float scalar)
         {

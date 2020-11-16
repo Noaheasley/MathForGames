@@ -22,8 +22,8 @@ namespace MathForGames
         protected Color _rayColor;
         protected Actor _parent;
         protected Actor[] _children = new Actor[0];
-        protected float _rotationAngle;
-        private float _collisionRadius;
+        //protected float _rotationAngle;
+        //private float _collisionRadius;
 
         public bool Started { get; private set; }
 
